@@ -70,7 +70,6 @@ export default class GameScene extends Scene implements FlappyGameScene {
     this.input.once('pointerdown', this.startGame, this)
   }
   
-  // FIXME: 简单重启会报错。需要恢复一些值，比如setActive
   restartGame() {
     this.scene.restart()
   }
