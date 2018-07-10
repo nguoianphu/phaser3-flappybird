@@ -7,7 +7,7 @@ export default class Ground extends GameObjects.TileSprite {
     this.setDepth(1)
   }
 
-  move(delta) {
+  updateGround(delta) {
     this.tilePositionX -= 100 * delta / 1000
   }
 }

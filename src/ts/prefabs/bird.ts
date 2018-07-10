@@ -4,6 +4,7 @@ import { config } from '../config'
 export default class Bird extends Physics.Arcade.Sprite implements FlappyBird {
   // 不能使用game属性哦
   private flySound: Phaser.Sound.BaseSound
+  private tween: Phaser.Tweens.Tween
 
   constructor(scene, x, y, texture) {
     super(scene, x, y, texture)
@@ -14,17 +15,19 @@ export default class Bird extends Physics.Arcade.Sprite implements FlappyBird {
     this.flySound = scene.sound.add('fly_sound')
     this.setDepth(1)
   }
-
+  
+  // 注意: 并不是内置的方法
   updateBird(scene) {
     // 撞到柱子
     if (this.active === false) return
     
-    // if (this.y > 180) {
-    //   this.angle += 1
-    // }
+    if (this.y > 180) {
+      this.angle += 1
+    }
     
-    if (this.y < 0 || this.y > 490) {
-      scene.gameOver()
+    // this.y < 0 || this.y > 490
+    if (this.y < 0) {
+      scene.hitPipe()
     }
   }
   
@@ -36,8 +39,9 @@ export default class Bird extends Physics.Arcade.Sprite implements FlappyBird {
     this.setVelocityY(flapPower)
     
     // 旋转
-    if (this.angle > -20) { 
-      this.scene.tweens.add({
+    if (this.angle > -20) {
+      this.stopTween()
+      this.tween = this.scene.tweens.add({
         targets: this,
         angle: '-= 20',
         duration: 100
@@ -48,13 +52,20 @@ export default class Bird extends Physics.Arcade.Sprite implements FlappyBird {
     this.flySound.play()
   }
 
-  
   headDroop() {
-    this.scene.tweens.add({
+    this.stopTween()
+    this.tween = this.scene.tweens.add({
       targets: this,
       duration: 500,
       angle: 70
     })
+  }
+
+  stopTween() {
+    if (this.tween) {
+      this.tween.stop()
+      this.tween = null
+    }
   }
 
   setG() {

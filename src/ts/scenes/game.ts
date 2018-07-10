@@ -1,4 +1,4 @@
-import { Scene, GameObjects } from 'phaser'
+import { Scene, GameObjects, Physics } from 'phaser'
 import { config } from '../config'
 import Pipes from '../prefabs/pipes'
 import Score from '../prefabs/score'
@@ -17,8 +17,6 @@ export default class GameScene extends Scene implements FlappyGameScene {
   private bird: FlappyBird
   private pipes: FlappyPipes
   private labelScore: FlappyScore
-  // Key
-  private keySpace: Phaser.Input.Keyboard.Key
   // Variables
   private started: boolean = false
   private width: number
@@ -83,7 +81,6 @@ export default class GameScene extends Scene implements FlappyGameScene {
     this.playTipImg.destroy()
     
     // 为小鸟添加事件
-    this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
     this.input.keyboard.on('keydown_SPACE', this.bird.jump, this.bird)
 
     // 为小鸟添加重力
@@ -108,6 +105,7 @@ export default class GameScene extends Scene implements FlappyGameScene {
     // collider
     this.physics.add.collider(this.bird, this.ground, this.hitGroud, null, this)
     this.physics.add.overlap(this.bird, this.pipes, this.hitPipe, null, this)
+    
 
     this.started = true
   }
@@ -120,7 +118,7 @@ export default class GameScene extends Scene implements FlappyGameScene {
     }
     
     if (this.ground.active) {
-      this.ground.move(delta)
+      this.ground.updateGround(delta)
     }
 
     if (this.bird.active) {
@@ -128,25 +126,28 @@ export default class GameScene extends Scene implements FlappyGameScene {
     }
   }
   
+  // 由于bird.disableBody仅执行一次
   private hitGroud() {
     if (!this.started) return
+
+    this.hitGroudSound.play()
+
     if (this.bird.active) {
-      this.hitGroudSound.play()
+      this.offBirdJump()
       this.stopGameObjects()
     }
+    
     this.gameOver()
   }
 
   // 坠落再结束游戏
-  private hitPipe() {
-    if (this.bird.active === false) return
+  hitPipe() {
+    if (!this.bird.active) return
 
-    // 解除鸟的飞翔绑定，这样也不用在bird的jump中判断了
-    this.input.keyboard.off('keydown_SPACE', this.bird.jump, this.bird, false)
-    
     this.hitPipeSound.play()
-
+    this.offBirdJump()
     this.stopGameObjects()
+
     this.bird.headDroop()
   }
 
@@ -156,14 +157,33 @@ export default class GameScene extends Scene implements FlappyGameScene {
     this.pipes.stop()
     this.bird.setActive(false)
   }
-  
-  private gameOver() {
-    if (!this.started) return
-    
-    // this.physics.world.disable([ this.bird, this.ground ])
 
+  // 解除鸟的飞翔绑定，这样也不用在bird的jump中判断了
+  private offBirdJump() {
+    this.input.keyboard.off('keydown_SPACE', this.bird.jump, this.bird, false)
+  }
+  
+  gameOver() {
+    if (!this.started) return
     // gameover
     this.started = false
+
+    // TODO: 此方法debug外的框没去掉
+    // this.bird.disableBody(true)
+    // 让鸟的嘴插入土里。。。有点hack
+    setTimeout(() => {
+      this.physics.world.disableBody(this.bird.body)
+      this.pipes.getChildren().forEach((child) => {
+        let childObj = <Physics.Arcade.Sprite>child
+        this.physics.world.disableBody(childObj.body)
+      })
+    }, 0)
+    // 貌似disable不行...还是注意看下文档disable和disableBody
+    // this.physics.world.disable([ this.bird, this.ground ])
+
+    // 落地后还在旋转头，有点怪怪的
+    this.bird.stopTween()
+
     this.showGameOver()
   }
 

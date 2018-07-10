@@ -10,6 +10,7 @@
 
 interface FlappyGameScene extends Phaser.Scene {
   scoreSound: Phaser.Sound.BaseSound
+  gameOver(): void
   restartGame(): void
 }
 
@@ -43,8 +44,9 @@ interface FlappyBird extends Phaser.Physics.Arcade.Sprite {
   jump(): void
   setG(): void
   headDroop(): void
+  stopTween(): void
 }
 
 interface FlappyGround extends Phaser.GameObjects.TileSprite {
-  move(delta: number): void
+  updateGround(delta: number): void
 }

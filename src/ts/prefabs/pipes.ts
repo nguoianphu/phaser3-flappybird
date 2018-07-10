@@ -42,7 +42,7 @@ export default class Pipes extends Physics.Arcade.Group implements FlappyPipes {
     this.add(bottomPipe, true)
     topPipe.setSpeed()
     bottomPipe.setSpeed()
-
+    
     // 其实也也可以监听
   }
 
