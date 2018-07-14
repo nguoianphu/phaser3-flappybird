@@ -167,7 +167,6 @@ export default class GameScene extends Scene implements FlappyGameScene {
     // gameover
     this.started = false
 
-    // TODO: 此方法debug外的框没去掉
     // this.bird.disableBody(true)
     // 让鸟的嘴插入土里。。。有点hack
     setTimeout(() => {

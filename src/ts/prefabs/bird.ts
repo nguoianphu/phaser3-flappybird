@@ -21,7 +21,8 @@ export default class Bird extends Physics.Arcade.Sprite implements FlappyBird {
     // 撞到柱子
     if (this.active === false) return
     
-    if (this.y > 180) {
+    // TODO: 
+    if (this.y > 200 && this.angle < 20) {
       this.angle += 1
     }
     
