@@ -10,6 +10,9 @@ export default class Score extends GameObjects.BitmapText implements FlappyScore
     super(scene, x, y, font, text, size)
     
     this._score = 0
+
+    // 防止文字被管道遮挡
+    this.setDepth(1)
   }
 
   alignRightBottom() {

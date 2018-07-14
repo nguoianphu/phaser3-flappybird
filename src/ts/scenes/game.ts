@@ -119,13 +119,12 @@ export default class GameScene extends Scene implements FlappyGameScene {
     if (this.ground.active) {
       this.ground.updateGround(delta)
     }
-
+    
     if (this.bird.active) {
       this.bird.updateBird(this)
     }
   }
   
-  // 由于bird.disableBody仅执行一次
   private hitGroud() {
     if (!this.started) return
 

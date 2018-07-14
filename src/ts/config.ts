@@ -18,5 +18,5 @@ export const config = {
   // 左右两个管道出现的间距区间
   pipeDistance: [150, 180],
   // 上下管道之间的间距区间
-  pipeHole: [100, 130]
+  pipeHole: [150, 160]
 }

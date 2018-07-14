@@ -11,9 +11,11 @@ export default class PreloadScene extends Scene {
     let height = <number>config.height
     let loadingPic = this.add.image(width / 2, height / 2, 'loading')
     
-    loadingPic.frame.setSize(0, 19)
+    loadingPic.setSize(0, 19)
     this.load.on('progress', (value) => {
-      loadingPic.frame.setSize(value * 220, 19)
+      // loadingPic.frame.setSize(value * 220, 19)
+      // phaser 3.11 frame没有setSize方法
+      loadingPic.setSize(value * 220, 19)
     })
   }
 
