@@ -15,8 +15,8 @@ interface FlappyGameScene extends Phaser.Scene {
 }
 
 interface FlappyPipes extends Phaser.Physics.Arcade.Group {
-  h: number
-  farestChild:Phaser.GameObjects.Sprite
+  // h: number
+  // farestChild:Phaser.GameObjects.Sprite
   genPipes(h: number): void
   genOnePipe(x: number): void
   handlePipeOut(pipe: Phaser.GameObjects.Sprite, frameNum: number): void

@@ -2,9 +2,9 @@ import { Physics, GameObjects } from 'phaser'
 import Pipe from './pipe'
 
 export default class Pipes extends Physics.Arcade.Group implements FlappyPipes {
-  h: number
-  farestChild: GameObjects.Sprite
-  _count: number = 0
+  private h: number
+  private farestChild: GameObjects.Sprite
+  private count: number = 0
 
   constructor(world, scene, config) {
     super(world, scene, config)
@@ -50,7 +50,7 @@ export default class Pipes extends Physics.Arcade.Group implements FlappyPipes {
   handlePipeOut(pipe, frameNum) {
     let topY
     let bottomY
-    this._count++
+    this.count++
     pipe.setX(this.farestChild.x + 200)
     
     // 设置不同的y
@@ -59,9 +59,10 @@ export default class Pipes extends Physics.Arcade.Group implements FlappyPipes {
     } else if (frameNum === 1) {
       // bottomY
     }
-    if (this._count == 2) {
+
+    if (this.count == 2) {
       this.setFarestChild(pipe)
-      this._count = 0
+      this.count = 0
     }
   }
 

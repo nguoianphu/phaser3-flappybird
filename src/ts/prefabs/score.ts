@@ -3,7 +3,7 @@ import { GameObjects  } from 'phaser'
 const round = Math.round
 
 export default class Score extends GameObjects.BitmapText implements FlappyScore {
-  _score: number = 0
+  private _score: number = 0
   
   // text必须传进来的，当然可以为undefined.
   constructor(scene, x, y, font, text, size) {

@@ -1,15 +1,14 @@
 import { Scene, GameObjects } from 'phaser'
 
 export default class MenuScene extends Scene {
-  background: GameObjects.TileSprite
-  ground: GameObjects.TileSprite
-  iter: number = 0
-  bird: GameObjects.Sprite
+  private background: GameObjects.TileSprite
+  private ground: GameObjects.TileSprite
+  private bird: GameObjects.Sprite
   
   constructor() {
     super({ key: 'Menu' }) 
   }
-
+  
   create() {
     let config = this.sys.game.config
     let width = <number>config.width

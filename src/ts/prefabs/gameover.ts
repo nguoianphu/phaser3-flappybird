@@ -11,8 +11,8 @@ export default class GameOver extends GameObjects.Container {
     super(scene, x, y)
     // this.setVisible(false)
   }
-
-  addDisplay(score) {
+  
+  private addDisplay(score) {
     let { scene } = this
     
     // this.setVisible(true)
@@ -57,11 +57,13 @@ export default class GameOver extends GameObjects.Container {
     })
     
     // score add
-    timeline.add({
-      targets: this.board.score,
-      score: 100,
-      duration: 200
-    })
+    if (score > 0) {
+      timeline.add({
+        targets: this.board.score,
+        score: score,
+        duration: 200
+      })
+    }
     // 最高分可能会动画哦
 
     // button
