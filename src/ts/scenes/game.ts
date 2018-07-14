@@ -12,7 +12,7 @@ export default class GameScene extends Scene implements FlappyGameScene {
   private background: GameObjects.TileSprite
   private readyTextImg: GameObjects.Image
   private playTipImg: GameObjects.Image
-  // Interface
+  // Instance
   private ground: FlappyGround
   private bird: FlappyBird
   private pipes: FlappyPipes
@@ -60,7 +60,6 @@ export default class GameScene extends Scene implements FlappyGameScene {
     this.add.existing(this.bird)
     this.bird.anims.play('fly')
     
-    // 虽然游戏还未开始，先添加了吧。。。虽然说不玩游戏就白加载了
     // 添加声音
     this.scoreSound = this.sound.add('score_sound')
     this.swooshingSound = this.sound.add('swooshing')
