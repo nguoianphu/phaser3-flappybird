@@ -6,8 +6,8 @@ export default class Bird extends Physics.Arcade.Sprite implements FlappyBird {
   private flySound: Phaser.Sound.BaseSound
   private tween: Phaser.Tweens.Tween
 
-  constructor(scene, x, y, texture) {
-    super(scene, x, y, texture)
+  constructor(scene, x, y, textureKey) {
+    super(scene, x, y, textureKey)
     
     // TODO: 为什么不太容易动态修改setOrigin??
 
