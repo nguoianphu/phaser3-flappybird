@@ -25,7 +25,7 @@ export default class PreloadScene extends Scene {
     let audio = this.load.audio.bind(this.load)
 
     // Images
-    this.load.setPath('src/images/')
+    this.load.setPath('assets/images/')
     // 背景图
     image('background', 'background.png')
     // 地面
@@ -53,11 +53,11 @@ export default class PreloadScene extends Scene {
     spritesheet('pipe', 'pipes.png', { frameWidth: 54, frameHeight: 320, endFrame: 1})
 
     // Fonts
-    this.load.setPath('src/fonts/')
+    this.load.setPath('assets/fonts/')
     this.load.bitmapFont('flappyfont', 'flappyfont.png', 'flappyfont.xml')
 
     // Audio
-    this.load.setPath('src/audio/')
+    this.load.setPath('assets/audio/')
     audio('fly_sound', 'flap.wav')
     audio('score_sound', 'score.wav')
     audio('hit_pipe_sound', 'pipehit.wav')

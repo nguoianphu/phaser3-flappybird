@@ -8,7 +8,6 @@ module.exports = {
   mode: 'development',
 
   entry: {
-    // phaser: ['phaser'],
     index: './src/ts/index',
   },
   
@@ -29,7 +28,7 @@ module.exports = {
 
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'ts-loader', include: path.resolve(__dirname, 'src') },
+      { test: /\.ts$/, loader: 'ts-loader', include: path.resolve(__dirname, 'src') },
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
@@ -38,19 +37,19 @@ module.exports = {
         //   //fallback: 'style-loader',
         //   use: ['css-loader', 'sass-loader']
         // }),
-      },
-      {
-        test: /\.(bmp|gif|jpg|jpeg|png|svg)$/,
-        include: path.resolve(__dirname, 'src/images'),
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]'
-            }
-          }
-        ]
       }
+      // {
+      //   test: /\.(bmp|gif|jpg|jpeg|png|svg)$/,
+      //   include: path.resolve(__dirname, 'src/images'),
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name].[ext]'
+      //       }
+      //     }
+      //   ]
+      // }
     ]
   },
 

@@ -7,7 +7,7 @@ export default class BootScene extends Scene {
   
   preload() {
     // 220 x 19 实际内容 208 x 12
-    this.load.image('loading', 'src/images/preloader.gif')
+    this.load.image('loading', 'assets/images/preloader.gif')
   }
 
   create() {
