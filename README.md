@@ -1,3 +1,3 @@
-# Phaser3-flappybird
+# phaser3-flappybird
 
-[online demo]()
+online demo
